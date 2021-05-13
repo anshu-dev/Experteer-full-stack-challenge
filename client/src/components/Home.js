@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 
 import JobCard from "./JobCard";
 import Search from "./Search";
 import Loader from "./Loader";
+import { getJobs } from "../services/jobApiServices";
 
 const initialJobListStatus = { initiate: true, loading: false, message: "" };
 
@@ -12,19 +12,12 @@ const Home = () => {
   const [searchStatus, setSearchStatus] = useState(initialJobListStatus);
   const [intervalId, setIntervalId] = useState();
 
-  const getJobList = () => {
-    const unSubscribeId = setInterval(() => {
-      axios
-        .get(`${process.env.REACT_APP_URL}/get-jobs-list`)
-        .then((response) => {
-          if (response.data != "") {
-            setjobs(response.data);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          // alert("Somethink went wrong, Please try again");
-        });
+  const getJobList = async () => {
+    const unSubscribeId = setInterval(async () => {
+      const data = await getJobs();
+      if (data != "") {
+        setjobs(data);
+      }
     }, 5000);
 
     setTimeout(() => clearInterval(unSubscribeId), 36000);
@@ -40,10 +33,9 @@ const Home = () => {
       message: "",
     });
     return () => {
-      const setPreservedOldState = { jobs, searchStatus, intervalId };
       localStorage.setItem(
         "preservedOldState",
-        JSON.stringify(setPreservedOldState)
+        JSON.stringify({ jobs, searchStatus, intervalId })
       );
     };
   }, [jobs]);

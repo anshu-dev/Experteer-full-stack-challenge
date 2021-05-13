@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Moment from "react-moment";
-
-import axios from "axios";
+import { getJobDiscription } from "../services/jobApiServices";
 
 const initialState = {
   id: null,
@@ -21,11 +20,8 @@ const Description = ({ match }) => {
   const history = useHistory();
 
   useEffect(async () => {
-    axios
-      .get(`${process.env.REACT_APP_URL}/get-job/${match.params.jobId}`)
-      .then((resjob) => {
-        setjob({ ...job, ...resjob.data });
-      });
+    const data = await getJobDiscription(match.params.jobId);
+    await setjob({ ...job, ...data });
   }, []);
 
   useEffect(() => {

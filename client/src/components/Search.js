@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import FormControl from "./FormControl";
-import axios from "axios";
+import { submitSearch } from "../services/jobApiServices";
 
 const initialSearchState = { location: null, search: null };
 
@@ -10,31 +10,19 @@ const Search = (props) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    await axios
-      .post(`${process.env.REACT_APP_URL}/submit-search`, search)
-      .then((response) => {
-        setSearchStatus({
-          ...searchStatus,
-          initiate: false,
-          loading: true,
-          message: response.data.message,
-        });
-        getJobList();
-      })
-
-      .catch((error) => {
-        console.log(error);
-        alert("Somethink went wrong, Please try again");
-      });
+    const data = await submitSearch(search);
+    await setSearchStatus({
+      ...searchStatus,
+      initiate: false,
+      loading: true,
+      message: data.message,
+    });
+    getJobList();
   };
 
   const onchnageHandler = async (e) => {
     setSearch({ ...search, [e.target.name]: e.target.value });
   };
-
-  // useEffect(()=>{
-
-  // },[])
 
   return (
     <>
