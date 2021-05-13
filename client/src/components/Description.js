@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Moment from "react-moment";
+<<<<<<< HEAD
 
 import axios from "axios";
+=======
+import { getJobDiscription } from "../services/jobApiServices";
+>>>>>>> 1aa6d11a8fc375c02cfafe33c8c815a8f4363df9
 
 const initialState = {
   id: null,
@@ -21,6 +25,7 @@ const Description = ({ match }) => {
   const history = useHistory();
 
   useEffect(async () => {
+<<<<<<< HEAD
     console.log("errr..............");
     axios
       .get(`${process.env.REACT_APP_URL}/get-job/${match.params.jobId}`)
@@ -31,6 +36,10 @@ const Description = ({ match }) => {
       .catch((err) => {
         console.log("errr", err);
       });
+=======
+    const data = await getJobDiscription(match.params.jobId);
+    await setjob({ ...job, ...data });
+>>>>>>> 1aa6d11a8fc375c02cfafe33c8c815a8f4363df9
   }, []);
 
   useEffect(() => {
@@ -60,6 +69,7 @@ const Description = ({ match }) => {
 
   return (
     <>
+<<<<<<< HEAD
       <h1>Description</h1>
       <button onClick={() => history.goBack()}>Go Back </button>
 
@@ -90,6 +100,39 @@ const Description = ({ match }) => {
           {!applied && (
             <input type="button" value="Apply" onClick={applyHandler} />
           )}
+=======
+      <div className="container customContainer">
+        <button onClick={() => history.goBack()}>Go Back </button>
+
+        <div className="card">
+          <div className="card-body">
+            <h5 className="card-title">{job.title}</h5>
+            <input
+              type="button"
+              disabled={applied}
+              value={!applied ? "Apply" : "Applied"}
+              onClick={applyHandler}
+            />
+            <button type="button" className="btn btn-outline-success">
+              {job.type}
+            </button>
+
+            <h6 className="card-subtitle mb-2 text-muted">{job.company}</h6>
+
+            <h5>{job.location}</h5>
+            <h6>
+              <Moment format="DD MMM YYYY">{new Date(job.created_at)}</Moment>
+            </h6>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: job.description,
+              }}
+            ></div>
+            {!applied && (
+              <input type="button" value="Apply" onClick={applyHandler} />
+            )}
+          </div>
+>>>>>>> 1aa6d11a8fc375c02cfafe33c8c815a8f4363df9
         </div>
       </div>
     </>
