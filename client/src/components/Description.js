@@ -51,36 +51,37 @@ const Description = ({ match }) => {
 
   return (
     <>
-      <h1>Description</h1>
-      <button onClick={() => history.goBack()}>Go Back </button>
+      <div className="container customContainer">
+        <button onClick={() => history.goBack()}>Go Back </button>
 
-      <div className="card" style={{ width: "18rem" }}>
-        <div className="card-body">
-          <h5 className="card-title">{job.title}</h5>
-          <input
-            type="button"
-            disabled={applied}
-            value={!applied ? "Apply" : "Applied"}
-            onClick={applyHandler}
-          />
-          <button type="button" className="btn btn-outline-success">
-            {job.type}
-          </button>
+        <div className="card">
+          <div className="card-body">
+            <h5 className="card-title">{job.title}</h5>
+            <input
+              type="button"
+              disabled={applied}
+              value={!applied ? "Apply" : "Applied"}
+              onClick={applyHandler}
+            />
+            <button type="button" className="btn btn-outline-success">
+              {job.type}
+            </button>
 
-          <h6 className="card-subtitle mb-2 text-muted">{job.company}</h6>
+            <h6 className="card-subtitle mb-2 text-muted">{job.company}</h6>
 
-          <h5>{job.location}</h5>
-          <h6>
-            <Moment format="DD MMM YYYY">{new Date(job.created_at)}</Moment>
-          </h6>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: job.description,
-            }}
-          ></div>
-          {!applied && (
-            <input type="button" value="Apply" onClick={applyHandler} />
-          )}
+            <h5>{job.location}</h5>
+            <h6>
+              <Moment format="DD MMM YYYY">{new Date(job.created_at)}</Moment>
+            </h6>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: job.description,
+              }}
+            ></div>
+            {!applied && (
+              <input type="button" value="Apply" onClick={applyHandler} />
+            )}
+          </div>
         </div>
       </div>
     </>

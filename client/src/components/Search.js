@@ -47,7 +47,12 @@ const Search = (props) => {
           onChange={onchnageHandler}
         />
 
-        <FormControl control="input" type="submit" name="submit" />
+        <FormControl
+          control="input"
+          type="submit"
+          name="submit"
+          className="searchbtn"
+        />
       </form>
     </>
   );

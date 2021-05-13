@@ -57,14 +57,19 @@ const Home = () => {
         searchStatus={searchStatus}
         getJobList={getJobList}
       />
-      {!searchStatus.initiate &&
-        (!searchStatus.loading ? (
-          jobs.map((job) => <JobCard key={job.id} job={job} />)
-        ) : (
-          <h6>
-            {searchStatus.message} <Loader />
-          </h6>
-        ))}
+      <div className="container">
+        {!searchStatus.initiate &&
+          (!searchStatus.loading ? (
+            jobs.map((job) => <JobCard key={job.id} job={job} />)
+          ) : (
+            <div className="message-loader">
+              <h2 className="loader-message"> {searchStatus.message}</h2>
+              <div>
+                <Loader />
+              </div>
+            </div>
+          ))}
+      </div>
     </>
   );
 };

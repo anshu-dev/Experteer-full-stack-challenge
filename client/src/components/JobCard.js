@@ -6,14 +6,15 @@ const JobCard = (props) => {
   const { job } = props;
   return (
     <>
-      <div className="card" style={{ width: "18rem" }}>
+      <div className="card">
         <Link to={`/description/${job.id}`}>
-          <div className="card-body">
-            <h5 className="card-title">{job.title}</h5>
-            <button type="button" className="btn btn-outline-success">
+          <div className="card-header">
+            <span className="card-title">{job.title}</span>
+            <a type="button" className="btn btn-outline-success">
               {job.type}
-            </button>
-
+            </a>
+          </div>
+          <div className="card-body">
             <h6 className="card-subtitle mb-2 text-muted">{job.company}</h6>
             <div
               dangerouslySetInnerHTML={{
