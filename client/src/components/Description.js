@@ -52,35 +52,50 @@ const Description = ({ match }) => {
   return (
     <>
       <div className="container customContainer">
-        <button onClick={() => history.goBack()}>Go Back </button>
+        <button onClick={() => history.goBack()}>{"<<"}</button>
 
         <div className="card">
-          <div className="card-body">
-            <h5 className="card-title">{job.title}</h5>
+          <div className="card-header">
+            <span className="card-title">{job.title}</span>
             <input
               type="button"
+              className="btn btn-outline-success"
               disabled={applied}
               value={!applied ? "Apply" : "Applied"}
               onClick={applyHandler}
             />
-            <button type="button" className="btn btn-outline-success">
-              {job.type}
-            </button>
+          </div>
 
-            <h6 className="card-subtitle mb-2 text-muted">{job.company}</h6>
+          <div className="card-body">
+            <div>
+              <h6 className="card-subtitle mb-2 text-muted">{job.company}</h6>
 
-            <h5>{job.location}</h5>
-            <h6>
-              <Moment format="DD MMM YYYY">{new Date(job.created_at)}</Moment>
-            </h6>
+              <h5>{job.location}</h5>
+              <h6>
+                <Moment format="DD MMM YYYY">{new Date(job.created_at)}</Moment>
+              </h6>
+            </div>
+            <div>
+              <a type="button" className="btn btn-outline-success">
+                {job.type}
+              </a>
+            </div>
+
             <div
               dangerouslySetInnerHTML={{
                 __html: job.description,
               }}
             ></div>
-            {!applied && (
-              <input type="button" value="Apply" onClick={applyHandler} />
-            )}
+            <div>
+              {!applied && (
+                <input
+                  type="button"
+                  className="btn btn-outline-success"
+                  value={"Apply"}
+                  onClick={applyHandler}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>
