@@ -18,7 +18,7 @@ exports.submit_search = async (req, res, next) => {
     .join("&");
 
   try {
-    fs.unlinkSync("./responeJobsJson/response_jobs.json");
+    fs.unlinkSync("./response_jobs.json");
   } catch (err) {
     // console.error(err);
   }
@@ -27,7 +27,7 @@ exports.submit_search = async (req, res, next) => {
     .get(`https://jobs.github.com/positions.json?${queryString}`)
     .then((resData) => {
       fs.writeFile(
-        "./responeJobsJson/response_jobs.json",
+        "./response_jobs.json",
         JSON.stringify(resData.data, null, 2),
         (err) => {
           if (err) console.log(err);
@@ -44,7 +44,7 @@ exports.submit_search = async (req, res, next) => {
 };
 
 exports.get_jobs_list = async (req, res, next) => {
-  fs.readFile("./responeJobsJson/response_jobs.json", function (err, data) {
+  fs.readFile("./response_jobs.json", function (err, data) {
     if (err) {
       res.send(null);
     } else {
