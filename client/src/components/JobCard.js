@@ -10,7 +10,7 @@ const JobCard = (props) => {
         <Link to={`/description/${job.id}`}>
           <div className="card-header">
             <span className="card-title">{job.title}</span>
-            <a type="button" className="btn btn-outline-success">
+            <a href="#" type="button" className="btn btn-outline-success">
               {job.type}
             </a>
           </div>

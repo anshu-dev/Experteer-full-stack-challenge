@@ -15,7 +15,7 @@ const Home = () => {
   const getJobList = async () => {
     const unSubscribeId = setInterval(async () => {
       const data = await getJobs();
-      if (data != "") {
+      if (data !== "") {
         setjobs(data);
       }
     }, 5000);

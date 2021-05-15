@@ -21,14 +21,17 @@ const Description = ({ match }) => {
 
   useEffect(async () => {
     const data = await getJobDiscription(match.params.jobId);
-    await setjob({ ...job, ...data });
-  }, []);
+
+    if (data) {
+      setjob({ ...job, ...data });
+    } 
+  }, [job, match.params.jobId]);
 
   useEffect(() => {
     let appiedIDs = localStorage.getItem("appliedIDs");
     if (appiedIDs) {
       let temp = JSON.parse(appiedIDs);
-      let temp2 = temp.filter((id) => job.id == id);
+      let temp2 = temp.filter((id) => job.id === id);
       temp2.length > 0 && setApplied("yes");
     }
   }, [job]);
@@ -76,7 +79,7 @@ const Description = ({ match }) => {
               </h6>
             </div>
             <div>
-              <a type="button" className="btn btn-outline-success">
+              <a href="#" className="btn btn-outline-success">
                 {job.type}
               </a>
             </div>

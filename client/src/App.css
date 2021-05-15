@@ -167,6 +167,8 @@ body::-webkit-scrollbar-thumb {
 }
 .loader-message {
   text-align: center;
+  color: #ffffff;
+  font-weight: 900;
 }
 
 .customContainer {
