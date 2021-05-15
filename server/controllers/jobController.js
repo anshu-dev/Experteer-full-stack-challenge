@@ -45,12 +45,13 @@ exports.submit_search = async (req, res, next) => {
 
 exports.get_jobs_list = async (req, res, next) => {
   fs.readFile("./responeJobsJson/response_jobs.json", function (err, data) {
-    if (err | !data) {
+    if (err) {
       res.send(null);
     } else {
       console.log(data);
       res.send(JSON.parse(data));
     }
+    // res.send(null);
   });
 };
 

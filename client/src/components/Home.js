@@ -15,7 +15,15 @@ const Home = () => {
   const getJobList = async () => {
     const unSubscribeId = setInterval(async () => {
       const data = await getJobs();
-      if (data !== "") {
+      console.log("......1", data);
+      if (data) {
+        console.log("......", data);
+        setSearchStatus({
+          ...searchStatus,
+          initiate: false,
+          loading: false,
+          message: "No data found",
+        });
         setjobs(data);
       }
     }, 5000);
@@ -26,12 +34,7 @@ const Home = () => {
 
   useEffect(() => {
     clearInterval(intervalId);
-    setSearchStatus({
-      ...searchStatus,
-      initiate: false,
-      loading: false,
-      message: "",
-    });
+
     return () => {
       localStorage.setItem(
         "preservedOldState",
@@ -58,9 +61,14 @@ const Home = () => {
         getJobList={getJobList}
       />
       <div className="container">
+        {console.log(searchStatus)}
         {!searchStatus.initiate &&
           (!searchStatus.loading ? (
-            jobs.map((job) => <JobCard key={job.id} job={job} />)
+            jobs.length <= 0 ? (
+              <h2 className="loader-message"> "No data found."</h2>
+            ) : (
+              jobs.map((job) => <JobCard key={job.id} job={job} />)
+            )
           ) : (
             <div className="message-loader">
               <h2 className="loader-message"> {searchStatus.message}</h2>
