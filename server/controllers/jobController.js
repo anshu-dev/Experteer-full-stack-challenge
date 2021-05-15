@@ -48,10 +48,8 @@ exports.get_jobs_list = async (req, res, next) => {
     if (err) {
       res.send(null);
     } else {
-      console.log(data);
       res.send(JSON.parse(data));
     }
-    // res.send(null);
   });
 };
 

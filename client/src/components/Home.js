@@ -15,14 +15,12 @@ const Home = () => {
   const getJobList = async () => {
     const unSubscribeId = setInterval(async () => {
       const data = await getJobs();
-      console.log("......1", data);
       if (data) {
-        console.log("......", data);
         setSearchStatus({
           ...searchStatus,
           initiate: false,
           loading: false,
-          message: "No data found",
+          message: "",
         });
         setjobs(data);
       }
